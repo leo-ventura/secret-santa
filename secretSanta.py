@@ -88,15 +88,6 @@ def getSecretFriend(names, currentName, taken):
         return getSecretFriend(names, currentName, taken)
     return possibleCandidates[secretID]
 
-def test():
-    MYADDRESS = input("Your email address: ")
-    PASSWORD  = input("Your password: ")
-
-    print(MYADDRESS)
-    print(PASSWORD)
-
-    host = getHost()
-    print(host)
 
 def main():
 
@@ -162,5 +153,4 @@ def main():
 
 
 if __name__ == '__main__':
-    # main()
-    test()
+    main()
