@@ -54,8 +54,8 @@ def getSecretFriend(names, currentName, taken):
 
 def main():
 
-    MYADDRESS = ""
-    PASSWORD  = ""
+    MYADDRESS = input("Your email address: ")
+    PASSWORD  = input("Your password: ")
 
     # set up the SMTP server
     s = smtplib.SMTP(host=insertHostHere, port=insertPortHere)
