@@ -1,6 +1,7 @@
 import smtplib
 import random
 import time
+import sys
 
 from string import Template
 
@@ -32,6 +33,42 @@ def parseTemplate(filename):
         content = templateFile.read()
     return Template(content)
 
+def getHost():
+    """
+        Returns the host chosen by user
+        gmail: smtp.gmail.com
+        outlook: smtp-mail.outlook.com
+        yahoo: smtp.mail.yahoo.com
+    """
+    hosts = ['smtp.gmail.com', 'smtp-mail.outlook.com', 'smtp.mail.yahoo.com']
+    print("Select which e-mail provider you are using.")
+    print("1) Gmail")
+    print("2) Outlook")
+    print("3) Yahoo")
+    print("4) Other")
+
+    answer = input()
+    try:
+        answer  = int(answer)
+
+        # handling "Other" option
+        if answer == 4:
+            print("Enter your e-mail provider.")
+            return input()
+
+        # checking if it's in range
+        elif answer > 0:
+            # being user-friendly sometimes makes your code looks uglier
+            # maybe I should just start at 0? I don't know.
+            return hosts[answer-1]
+
+        # if it's not in range, recursively try again
+        else:
+            return getHost()
+    except:
+        print("Please, enter a valid number!", file=sys.stderr)
+        sys.exit(1)
+
 
 def getSecretFriend(names, currentName, taken):
     """
@@ -51,14 +88,25 @@ def getSecretFriend(names, currentName, taken):
         return getSecretFriend(names, currentName, taken)
     return possibleCandidates[secretID]
 
+def test():
+    MYADDRESS = input("Your email address: ")
+    PASSWORD  = input("Your password: ")
+
+    print(MYADDRESS)
+    print(PASSWORD)
+
+    host = getHost()
+    print(host)
 
 def main():
 
     MYADDRESS = input("Your email address: ")
     PASSWORD  = input("Your password: ")
 
+    host = getHost()
+
     # set up the SMTP server
-    s = smtplib.SMTP(host=insertHostHere, port=insertPortHere)
+    s = smtplib.SMTP(host=host, port=587)
     s.starttls()
     s.login(MYADDRESS, PASSWORD)
 
@@ -114,4 +162,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    test()
