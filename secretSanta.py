@@ -113,7 +113,8 @@ def main():
         randomID = random.randint(0,len(names)-1)
 
         # trying to find an unchosen name
-        # (a little inneficient I know, but it does the trick and it's randomized)
+        # (a little inneficient I know, but it does the trick
+        # and it's randomized)
         while names[randomID] in alreadyChosen:
             randomID = random.randint(0,len(names)-1)
 
@@ -134,7 +135,8 @@ def main():
         msg = MIMEMultipart()
 
         # uses the template to assemble our message together
-        message = template.substitute(Name=name.title(), SecretFriend=secretFriendName)
+        message = template.substitute(Name=name.title(),
+                                      SecretFriend=secretFriendName)
 
         # setup the parameters of the message
         msg['From']    = MYADDRESS
